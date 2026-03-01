@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <span class="logo-dot"></span>
+            <span>AI Career Planner</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('dashboard') }}" class="nav-item">Dashboard</a>
+            <a href="{{ url_for('upload_resume') }}" class="nav-item">Upload Resume</a>
+            <a href="{{ url_for('career_selection') }}" class="nav-item">Choose Career</a>
+            <a href="{{ url_for('results') }}" class="nav-item active">Skill Gap & Results</a>
+            <a href="{{ url_for('roadmap') }}" class="nav-item">Roadmap</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="{{ url_for('logout') }}" class="nav-item logout">Logout</a>
+        </div>
+    </aside>
+
+    <main class="dashboard-main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-container" style="margin-bottom:1rem;">
+            {% for category, msg in messages %}
+            <div class="alert alert-{{ category }}">{{ msg }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <header class="dashboard-header">
+            <h1>Skill Gap Analysis</h1>
+        </header>
+
+        <section class="card-grid">
+            <article class="card">
+                <p>Target career: <strong>{{ career.name if career else 'None' }}</strong></p>
+            </article>
+            <article class="card">
+                <h3>Career Readiness Score</h3>
+                <div style=\"font-size: 2.5rem; font-weight: bold; color: #22d3ee; margin-bottom: 0.5rem;\">{{ readiness_score }}%</div>
+                <div style=\"width: 100%; height: 10px; background: #374151; border-radius: 5px; overflow: hidden; margin: 1rem 0;\">
+                    <div style=\"width: {{ readiness_score }}%; height: 100%; background: linear-gradient(135deg, #22c55e, #22d3ee);\"></div>
+                </div>
+                <p class=\"muted\">Skills completed: {{ completed_skills }} / {{ total_skills }}</p>
+            </article>
+            
+            <article class=\"card\">
+                <h3>Your existing skills</h3>
+                {% if existing %}
+                <ul>
+                    {% for s in existing %}
+                    <li>✔ {{ s }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>None detected.</p>
+                {% endif %}
+            </article>
+            <article class="card">
+                <h3>Missing skills</h3>
+                {% if missing %}
+                <ul>
+                    {% for s in missing %}
+                    <li>{{ s }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>You're already qualified for this career!</p>
+                {% endif %}
+            </article>
+            <article class="card">
+                <a href="{{ url_for('roadmap') }}" class="btn">Generate study roadmap</a>
+            </article>
+            <article class="card">                <a href=\"{{ url_for('courses') }}\" class=\"btn\">View course recommendations</a>
+            </article>
+            <article class=\"card\">
+                <a href=\"{{ url_for('track_progress') }}\" class=\"btn\">Track your progress</a>
+            </article>
+            <article class=\"card\">                <a href="{{ url_for('dashboard') }}" class="btn secondary">Dashboard</a>
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>

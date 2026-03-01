@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Data Scientist",
+    "skills": [
+      "Python",
+      "Statistics",
+      "Machine Learning",
+      "Data Visualization",
+      "SQL"
+    ]
+  },
+  {
+    "name": "AI Engineer",
+    "skills": [
+      "Python",
+      "Deep Learning",
+      "Neural Networks",
+      "TensorFlow",
+      "PyTorch"
+    ]
+  },
+  {
+    "name": "Web Developer",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Flask",
+      "React"
+    ]
+  },
+  {
+    "name": "Data Analyst",
+    "skills": [
+      "Excel",
+      "SQL",
+      "Python",
+      "Tableau",
+      "Statistics"
+    ]
+  }
+]

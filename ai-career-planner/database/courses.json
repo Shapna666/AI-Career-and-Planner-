@@ -1,0 +1,70 @@
+{
+  "Python": [
+    {"title": "Python for Everybody (Coursera)", "url": "https://www.coursera.org/learn/python"},
+    {"title": "Python Crash Course (Book)", "url": "https://nostarch.com/pythoncrashcourse2e"},
+    {"title": "Real Python Tutorials", "url": "https://realpython.com"}
+  ],
+  "Machine Learning": [
+    {"title": "Andrew Ng - Machine Learning Course (Coursera)", "url": "https://www.coursera.org/learn/machine-learning"},
+    {"title": "Fast.ai - Practical Deep Learning", "url": "https://course.fast.ai"},
+    {"title": "Kaggle Learn - ML Tutorials", "url": "https://kaggle.com/learn"}
+  ],
+  "Statistics": [
+    {"title": "Statistics for Data Analysis (Coursera)", "url": "https://www.coursera.org/learn/statistics-for-data-analysis"},
+    {"title": "Khan Academy - Statistics", "url": "https://www.khanacademy.org/math/statistics-probability"}
+  ],
+  "Data Visualization": [
+    {"title": "Tableau Public Learning", "url": "https://www.tableau.com/learn"},
+    {"title": "Matplotlib Tutorial (Real Python)", "url": "https://realpython.com/python-matplotlib-guide"},
+    {"title": "Seaborn Documentation", "url": "https://seaborn.pydata.org"}
+  ],
+  "SQL": [
+    {"title": "SQL Tutorial (W3Schools)", "url": "https://www.w3schools.com/sql"},
+    {"title": "SQL for Data Analysis (Mode Analytics)", "url": "https://mode.com/sql-tutorial"},
+    {"title": "DataCamp SQL Courses", "url": "https://www.datacamp.com/courses/intro-to-sql"}
+  ],
+  "Deep Learning": [
+    {"title": "Deep Learning Specialization (Coursera)", "url": "https://www.coursera.org/specializations/deep-learning"},
+    {"title": "Fast.ai - Practical Deep Learning", "url": "https://course.fast.ai"}
+  ],
+  "TensorFlow": [
+    {"title": "TensorFlow Official Tutorials", "url": "https://www.tensorflow.org/tutorials"},
+    {"title": "Google Cloud - TensorFlow Essentials", "url": "https://cloud.google.com/learn/training/tensorflow"}
+  ],
+  "PyTorch": [
+    {"title": "PyTorch Tutorials", "url": "https://pytorch.org/tutorials"},
+    {"title": "Deep Learning with PyTorch (Udacity)", "url": "https://github.com/udacity/deep-learning-v2-pytorch"}
+  ],
+  "HTML": [
+    {"title": "HTML Essentials (MDN Web Docs)", "url": "https://developer.mozilla.org/en-US/docs/Learn/HTML"},
+    {"title": "HTML for Beginners (W3Schools)", "url": "https://www.w3schools.com/html"}
+  ],
+  "CSS": [
+    {"title": "CSS Complete Guide (Udemy)", "url": "https://www.udemy.com/course/css-the-complete-guide"},
+    {"title": "CSS Tricks & Tips (MDN)", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"}
+  ],
+  "JavaScript": [
+    {"title": "JavaScript.info - Interactive Tutorial", "url": "https://javascript.info"},
+    {"title": "Eloquent JavaScript (Free Book)", "url": "https://eloquentjavascript.net"}
+  ],
+  "Flask": [
+    {"title": "Flask Official Documentation", "url": "https://flask.palletsprojects.com"},
+    {"title": "Miguel Grinberg - Flask Mega-Tutorial", "url": "https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world"}
+  ],
+  "React": [
+    {"title": "React Official Docs", "url": "https://react.dev"},
+    {"title": "Scrimba - Learn React", "url": "https://scrimba.com/learn/react"}
+  ],
+  "Tableau": [
+    {"title": "Tableau Public Learning", "url": "https://www.tableau.com/learn"},
+    {"title": "Tableau Desktop Specialist Certification", "url": "https://www.tableau.com/learn/certification"}
+  ],
+  "Excel": [
+    {"title": "Excel Skills for Data Analytics (Coursera)", "url": "https://www.coursera.org/learn/excel-data-analytics"},
+    {"title": "Microsoft Excel Training", "url": "https://support.microsoft.com/en-us/training"}
+  ],
+  "Neural Networks": [
+    {"title": "Neural Networks from Scratch (3Blue1Brown)", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_LFPM5e-f"},
+    {"title": "Deeplearning.AI Course", "url": "https://www.deeplearning.ai"}
+  ]
+}

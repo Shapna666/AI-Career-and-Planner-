@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Career - AI Career Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <span class="logo-dot"></span>
+            <span>AI Career Planner</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('dashboard') }}" class="nav-item">Dashboard</a>
+            <a href="{{ url_for('upload_resume') }}" class="nav-item">Upload Resume</a>
+            <a href="{{ url_for('career_selection') }}" class="nav-item active">Choose Career</a>
+            <a href="{{ url_for('results') }}" class="nav-item">Skill Gap & Results</a>
+            <a href="{{ url_for('roadmap') }}" class="nav-item">Roadmap</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="{{ url_for('logout') }}" class="nav-item logout">Logout</a>
+        </div>
+    </aside>
+
+    <main class="dashboard-main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-container" style="margin-bottom:1rem;">
+            {% for category, msg in messages %}
+            <div class="alert alert-{{ category }}">{{ msg }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <header class="dashboard-header">
+            <div>
+                <h1>Select your target career</h1>
+                <p class="muted">Pick a role and we'll load the required skills for gap analysis and your personalized roadmap.</p>
+                {% if session.get('target_career') %}
+                <p class="muted">Currently chosen: <strong>{{ session.get('target_career') }}</strong></p>
+                {% endif %}
+                {% if session.get('user_skills') %}
+                <p class="muted">Detected skills from resume: {{ session.get('user_skills', [])|join(', ') }}</p>
+                {% endif %}
+            </div>
+        </header>
+
+        <section class="card-grid">
+            <article class="card wide-card">
+                {% if careers %}
+                <form method="post">
+                    <label for="career">Choose a career goal</label>
+                    <select id="career" name="career" required>
+                        {% for c in careers %}
+                        <option value="{{ c.name }}" {% if session.get('target_career')==c.name %}selected{% endif %}>{{ c.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn" style="margin-top:1rem;">Continue</button>
+                </form>
+                {% else %}
+                <p>No careers are configured yet. Please check back later.</p>
+                {% endif %}
+            </article>
+
+            <article class="card">
+                <h3>What happens next?</h3>
+                <p class="muted">Once you pick a target career, the system will:</p>
+                <ul>
+                    <li>load the role's required skills</li>
+                    <li>compare them to your extracted resume skills</li>
+                    <li>show existing vs. missing skills on the results page</li>
+                    <li>generate a week‑by‑week study roadmap</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>
