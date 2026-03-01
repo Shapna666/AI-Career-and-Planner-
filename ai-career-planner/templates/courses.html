@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Learning Roadmap</title>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <meta charset="UTF-8">
+    <title>Course Recommendations - AI Career Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <div class="dashboard-layout">
@@ -17,7 +17,7 @@
             <a href="{{ url_for('upload_resume') }}" class="nav-item">Upload Resume</a>
             <a href="{{ url_for('career_selection') }}" class="nav-item">Choose Career</a>
             <a href="{{ url_for('results') }}" class="nav-item">Skill Gap & Results</a>
-            <a href="{{ url_for('roadmap') }}" class="nav-item active">Roadmap</a>
+            <a href="{{ url_for('roadmap') }}" class="nav-item">Roadmap</a>
         </nav>
         <div class="sidebar-footer">
             <a href="{{ url_for('logout') }}" class="nav-item logout">Logout</a>
@@ -36,23 +36,35 @@
         {% endwith %}
 
         <header class="dashboard-header">
-            <h1>Your Personalized Roadmap</h1>
+            <h1>Course Recommendations</h1>
+            <p class="muted">For career: <strong>{{ career.name if career else 'None' }}</strong></p>
         </header>
 
         <section class="card-grid">
+            {% if courses_list %}
+                {% for skill, course_list in courses_list.items() %}
+                <article class="card">
+                    <h3>{{ skill }}</h3>
+                    <ul>
+                        {% for course in course_list %}
+                        <li>
+                            <a href="{{ course.url }}" target="_blank" style="color: #3b82f6; text-decoration: none;">{{ course.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </article>
+                {% endfor %}
+            {% else %}
+            <article class="card wide-card">
+                <p class="muted">No missing skills to learn! You're ready for this career.</p>
+            </article>
+            {% endif %}
+
             <article class="card">
-                {% if roadmap %}
-                <ol>
-                    {% for week, topic in roadmap.items() %}
-                    <li>{{ week }}: {{ topic }}</li>
-                    {% endfor %}
-                </ol>
-                {% else %}
-                <p>No missing skills – nothing to plan!</p>
-                {% endif %}
+                <a href="{{ url_for('track_progress') }}" class="btn">Track Progress</a>
             </article>
             <article class="card">
-                <a href="{{ url_for('dashboard') }}" class="btn secondary">Back to dashboard</a>
+                <a href="{{ url_for('dashboard') }}" class="btn secondary">Dashboard</a>
             </article>
         </section>
     </main>

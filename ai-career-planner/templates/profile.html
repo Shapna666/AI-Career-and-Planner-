@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Learning Roadmap</title>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <meta charset="UTF-8">
+    <title>Profile - AI Career Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <div class="dashboard-layout">
@@ -17,7 +17,7 @@
             <a href="{{ url_for('upload_resume') }}" class="nav-item">Upload Resume</a>
             <a href="{{ url_for('career_selection') }}" class="nav-item">Choose Career</a>
             <a href="{{ url_for('results') }}" class="nav-item">Skill Gap & Results</a>
-            <a href="{{ url_for('roadmap') }}" class="nav-item active">Roadmap</a>
+            <a href="{{ url_for('roadmap') }}" class="nav-item">Roadmap</a>
         </nav>
         <div class="sidebar-footer">
             <a href="{{ url_for('logout') }}" class="nav-item logout">Logout</a>
@@ -25,34 +25,30 @@
     </aside>
 
     <main class="dashboard-main">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div class="flash-container" style="margin-bottom:1rem;">
-            {% for category, msg in messages %}
-            <div class="alert alert-{{ category }}">{{ msg }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
-
         <header class="dashboard-header">
-            <h1>Your Personalized Roadmap</h1>
+            <h1>My Profile</h1>
+            <p class="muted">Email: <strong>{{ user.email }}</strong></p>
         </header>
 
         <section class="card-grid">
-            <article class="card">
-                {% if roadmap %}
-                <ol>
-                    {% for week, topic in roadmap.items() %}
-                    <li>{{ week }}: {{ topic }}</li>
+            <article class="card wide-card">
+                <h3>Previous Career Analyses</h3>
+                {% if analyses %}
+                <ul>
+                    {% for analysis in analyses %}
+                    <li>
+                        <strong>{{ analysis.career_name }}</strong> - {{ analysis.created_at.strftime('%Y-%m-%d %H:%M') }}
+                        <br><small class="muted">Skills: {{ analysis.extracted_skills }}</small>
+                    </li>
                     {% endfor %}
-                </ol>
+                </ul>
                 {% else %}
-                <p>No missing skills – nothing to plan!</p>
+                <p class="muted">No analyses saved yet. Complete an analysis to save it here.</p>
                 {% endif %}
             </article>
+
             <article class="card">
-                <a href="{{ url_for('dashboard') }}" class="btn secondary">Back to dashboard</a>
+                <a href="{{ url_for('dashboard') }}" class="btn secondary">Back to Dashboard</a>
             </article>
         </section>
     </main>

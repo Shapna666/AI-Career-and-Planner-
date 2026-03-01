@@ -198,6 +198,28 @@ input {
 .pill {
     padding: 0.25rem 0.7rem;
     border-radius: 999px;
+}
+
+/* flash alerts */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+.alert-success { background: #22c55e; color: #050816; }
+.alert-warning { background: #facc15; color: #050816; }
+.alert-danger  { background: #ef4444; color: #fff; }
+.alert-info    { background: #3b82f6; color: #fff; }
+
+/* list styling inside cards */
+.card ul, .card ol {
+    margin: 0.5rem 0 0.5rem 1.25rem;
+}
+.card ul li, .card ol li {
+    margin-bottom: 0.25rem;
+}
+
     background: rgba(15, 23, 42, 0.8);
     border: 1px solid #1f2937;
     font-size: 0.8rem;

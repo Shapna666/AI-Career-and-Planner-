@@ -10,5 +10,6 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
+    DEBUG = os.environ.get("FLASK_DEBUG", "0") == "1"
 
 
