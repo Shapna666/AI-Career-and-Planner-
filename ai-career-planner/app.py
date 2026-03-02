@@ -118,7 +118,7 @@ def create_app():
                 flash("Invalid file name. Please rename your resume and try again.", "warning")
                 return redirect(url_for("upload_resume"))
 
-            allowed_extensions = {".pdf", ".doc", ".docx"}
+            allowed_extensions = {".pdf", ".doc", ".docx", ".jpg", ".jpeg"}
             _, ext = os.path.splitext(filename)
             if ext.lower() not in allowed_extensions:
                 flash("Unsupported file type. Please upload a PDF or Word document.", "warning")
@@ -166,29 +166,55 @@ def create_app():
         target = session.get("target_career")
         user_skills = session.get("user_skills", [])
         career = None
+        required_skills = []
         if target:
             careers_file = os.path.join(app.root_path, "database", "careers.json")
             with open(careers_file, "r", encoding="utf-8") as f:
                 careers = json.load(f)
             career = next((c for c in careers if c["name"] == target), None)
+            if career:
+                required_skills = career.get("skills", [])
         existing, missing = [], []
         if career:
-            existing, missing = compare_skills(user_skills, career.get("skills", []))
+            existing, missing = compare_skills(user_skills, required_skills)
         
-        # Calculate readiness score
-        total_skills = len(career.get("skills", [])) if career else 1
-        readiness_score = int((len(existing) / total_skills * 100)) if total_skills > 0 else 0
+        user_id = session.get("user_id")
+        # Include completed skills from progress tracking
+        effective_existing = list(existing)
+        if user_id and career:
+            completed_progress = SkillProgress.query.filter_by(
+                user_id=user_id, career_name=target, is_completed=True
+            ).all()
+            completed_names = {p.skill_name for p in completed_progress}
+            for skill_name in completed_names:
+                if skill_name in missing and skill_name not in effective_existing:
+                    effective_existing.append(skill_name)
+
+        # Calculate readiness score using effective_existing
+        total_skills = len(required_skills) if required_skills else 1
+        readiness_score = int((len(set(effective_existing)) / total_skills * 100)) if total_skills > 0 else 0
         
         # Save analysis to database
-        user_id = session.get("user_id")
         if user_id and career:
             existing_analysis = Analysis.query.filter_by(user_id=user_id, career_name=target).first()
             if not existing_analysis:
-                analysis = Analysis(user_id=user_id, career_name=target, extracted_skills=json.dumps(user_skills))
+                analysis = Analysis(
+                    user_id=user_id,
+                    career_name=target,
+                    extracted_skills=json.dumps(user_skills),
+                )
                 db.session.add(analysis)
                 db.session.commit()
         
-        return render_template("results.html", career=career, existing=existing, missing=missing, readiness_score=readiness_score, total_skills=total_skills, completed_skills=len(existing))
+        return render_template(
+            "results.html",
+            career=career,
+            existing=existing,
+            missing=missing,
+            readiness_score=readiness_score,
+            total_skills=total_skills,
+            completed_skills=len(set(effective_existing)),
+        )
 
     @app.route("/roadmap")
     def roadmap():
