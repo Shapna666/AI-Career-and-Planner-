@@ -14,10 +14,15 @@
     </nav>
 </header>
 <main>
-    <section>
+    <section class="card highlight-card" style="max-width: 860px; margin: 4rem auto; text-align: center;">
         <h2>Plan your AI career with confidence</h2>
-        <p>Upload your resume, choose a target AI role, and get a personalized learning roadmap.</p>
-        <a class="btn" href="{{ url_for('signup') }}" class="btn">Get Started</a>
+        <p class="muted">Upload your resume, choose a target AI role, and get a personalized roadmap with skill gaps and curated courses.</p>
+        <div class="pill-row" style="justify-content:center;">
+            <span class="pill">Resume Analysis</span>
+            <span class="pill">Skill Gap Insights</span>
+            <span class="pill">Career Roadmaps</span>
+        </div>
+        <a class="btn" href="{{ url_for('signup') }}">Get Started</a>
     </section>
 </main>
 </body>

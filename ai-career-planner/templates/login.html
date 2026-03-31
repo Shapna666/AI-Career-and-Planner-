@@ -7,7 +7,18 @@
 </head>
 <body>
 <main class="auth-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container" style="margin-bottom:1rem;">
+        {% for category, msg in messages %}
+        <div class="alert alert-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
     <h2>Login</h2>
+    <p class="muted">Welcome back! Continue your AI career journey.</p>
     <form method="post">
         <label>Email
             <input type="email" name="email" required>

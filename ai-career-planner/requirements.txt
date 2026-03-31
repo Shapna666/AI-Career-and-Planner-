@@ -2,4 +2,6 @@ flask
 flask_sqlalchemy
 werkzeug
 PyPDF2
+psycopg2-binary
+python-dotenv
 
